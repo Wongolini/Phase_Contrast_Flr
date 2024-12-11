@@ -7,13 +7,6 @@ import numpy as np
 from nd2reader import ND2Reader
 from matplotlib.colors import Normalize
 from matplotlib import cm 
-#%%
-path = "/Users/nwong/Documents/s_elongatus/images/awakenings/"
-img1 = "/Users/nwong/Documents/s_elongatus/images/awakenings/healthy_001.nd2"
-img2 = "/Users/nwong/Documents/s_elongatus/images/awakenings/starved_001.nd2"
-
-
-# %%
 from PIL import Image, ImageEnhance
 from skimage import (
     filters, measure, morphology, segmentation
@@ -22,6 +15,14 @@ from skimage.data import protein_transport
 from scipy import ndimage as ndi
 import pandas as pd 
 import seaborn as sns 
+#%%
+path = "/Users/nwong/Documents/s_elongatus/images/awakenings/"
+img1 = "/Users/nwong/Documents/s_elongatus/images/awakenings/healthy_001.nd2"
+img2 = "/Users/nwong/Documents/s_elongatus/images/awakenings/starved_001.nd2"
+
+
+# %%
+
 
 def get_frames(image_path):
     frames = []
