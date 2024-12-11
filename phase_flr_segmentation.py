@@ -111,55 +111,59 @@ def calc_single_cell_flr(frames):
     
     return phase, flr, mask, props_c
 
-frames1 = get_frames(img1)
-frames2 = get_frames(img2)
-phase1, flr1, mask1, props_c1 = calc_single_cell_flr(frames1)
-phase2, flr2, mask2, props_c2 = calc_single_cell_flr(frames2)
 
-fig,axs=plt.subplots(nrows=2, ncols=3, dpi=800)
+if __name__ == "__main__":
+    frames1 = get_frames(img1)
+    frames2 = get_frames(img2)
+    phase1, flr1, mask1, props_c1 = calc_single_cell_flr(frames1)
+    phase2, flr2, mask2, props_c2 = calc_single_cell_flr(frames2)
 
-
-axs[0,0].imshow(phase1, cmap='gray')
-axs[0,0].set_title('Phase')
-axs[0,1].imshow(mask1, cmap='binary')
-axs[0,1].set_title('Segmentation')
-axs[0,2].imshow(flr1, cmap='inferno')
-axs[0,2].set_title('Cy5')
-
-axs[1,0].imshow(phase2, cmap='gray')
-axs[1,1].imshow(mask2, cmap='binary')
-axs[1,2].imshow(flr2, cmap='inferno')
-axs[0,0].set_ylabel("Healthy")
-axs[1,0].set_ylabel("Chlorotic")
-fig.tight_layout()
+    fig,axs=plt.subplots(nrows=2, ncols=3, dpi=800)
 
 
+    axs[0,0].imshow(phase1, cmap='gray')
+    axs[0,0].set_title('Phase', fontsize=15)
+    axs[0,1].imshow(mask1, cmap='binary')
+    axs[0,1].set_title('Segmentation', fontsize=15)
+    axs[0,2].imshow(flr1, cmap='inferno')
+    axs[0,2].set_title('Cy5', fontsize=15)
 
-for i,a in enumerate(axs.ravel()):
-    if i!=3 or i!=6:
-        a.set_xticks([])
-        a.set_yticks([])
-fig.tight_layout()
+    axs[1,0].imshow(phase2, cmap='gray')
+    axs[1,1].imshow(mask2, cmap='binary')
+    axs[1,2].imshow(flr2, cmap='inferno')
+    axs[0,0].set_ylabel("Healthy", fontsize=15)
+    axs[1,0].set_ylabel("Chlorotic", fontsize=15)
+    fig.tight_layout()
 
 
-fig,axs = plt.subplots(sharey=True, dpi=800)
-props_c1['treatment'] = ["Healthy"]*len(props_c1)
-props_c2['treatment'] = ["Chlorotic"]*len(props_c2)
-df = pd.concat((props_c1, props_c2))
-sns.swarmplot(df,
-              y="intensity_mean",
-              x="treatment",
-              ax=axs,
-              size=6,
-              color="gray",
-              edgecolor='black',
-              linewidth=1
-              )
 
-axs.set_title('Healthy')
-axs.set_title("Chlorophyll Per Cell")
-axs.set_ylabel("Flr Intensity")
-fig.tight_layout(w_pad=0)
-# %%
+    for i,a in enumerate(axs.ravel()):
+        if i!=3 or i!=6:
+            a.set_xticks([])
+            a.set_yticks([])
+    fig.tight_layout()
 
-# %%
+
+    fig,axs = plt.subplots(sharey=True, dpi=800)
+    props_c1['treatment'] = ["Healthy"]*len(props_c1)
+    props_c2['treatment'] = ["Chlorotic"]*len(props_c2)
+    df = pd.concat((props_c1, props_c2))
+    sns.swarmplot(df,
+                y="intensity_mean",
+                x="treatment",
+                ax=axs,
+                size=6,
+                color="gray",
+                edgecolor='black',
+                linewidth=1
+                )
+    axs.grid(axis='y')
+
+    axs.set_title('Healthy', fontsize=15)
+    axs.set_title("Chlorophyll Per Cell", fontsize=20)
+    axs.set_ylabel("Flr Intensity", fontsize=15)
+    axs.set_xlabel("Treatment", fontsize=15)
+    fig.tight_layout(w_pad=0)
+    # %%
+
+    # %%
